@@ -160,13 +160,13 @@
         }
       });
       gsap.timeline({ scrollTrigger: { trigger: secProc, start: "top 70%" } })
-        .from(".card", { y: 90, rotateX: 14, opacity: 0, duration: 1.3, ease: "expo.out", stagger: .1 })
+        .from(".card", { y: 70, opacity: 0, duration: 1.2, ease: "expo.out", stagger: .1 })
         .from(".card__img", { clipPath: "inset(100% 0% 0% 0% round 14px)", duration: 1.4, ease: "expo.inOut", stagger: .1 }, .15);
       return () => secProc.classList.remove("horizontal");
     });
     mm.add("(max-width: 1080px)", () => {
       gsap.from(".card", {
-        y: 90, rotateX: 14, opacity: 0, duration: 1.3, ease: "expo.out", stagger: .12,
+        y: 70, opacity: 0, duration: 1.2, ease: "expo.out", stagger: .12,
         scrollTrigger: { trigger: ".cards", start: "top 82%" }
       });
       $$(".card__img").forEach(img => {
@@ -285,6 +285,7 @@
 
     // Cards inclinam e o brilho segue o mouse
     $$(".card").forEach(card => {
+      gsap.set(card, { transformPerspective: 1000 });
       const rx = gsap.quickTo(card, "rotateX", { duration: .6, ease: "power3" });
       const ry = gsap.quickTo(card, "rotateY", { duration: .6, ease: "power3" });
       const img = $(".card__img", card);
@@ -292,7 +293,7 @@
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - .5;
         const py = (e.clientY - r.top) / r.height - .5;
-        rx(py * -8); ry(px * 8);
+        rx(py * -5); ry(px * 5);
         const ri = img.getBoundingClientRect();
         img.style.setProperty("--mx", `${e.clientX - ri.left}px`);
         img.style.setProperty("--my", `${e.clientY - ri.top}px`);

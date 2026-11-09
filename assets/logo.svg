@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
   <circle cx="60" cy="60" r="58" fill="#fbf8f4" stroke="#e6ddd2" stroke-width="2"/>
-  <text x="44" y="78" font-family="Cormorant Garamond, Georgia, serif" font-size="58" fill="#2b2826" text-anchor="middle">G</text>
-  <text x="74" y="90" font-family="Cormorant Garamond, Georgia, serif" font-size="58" fill="#2b2826" text-anchor="middle">R</text>
+  <text x="44" y="78" font-family="Bodoni Moda, Didot, Georgia, serif" font-size="58" fill="#2b2826" text-anchor="middle">G</text>
+  <text x="74" y="90" font-family="Bodoni Moda, Didot, Georgia, serif" font-size="58" fill="#2b2826" text-anchor="middle">R</text>
   <rect x="22" y="62" width="76" height="9" fill="#e9e3dc" opacity=".85"/>
   <text x="60" y="69.5" font-family="Georgia, serif" font-style="italic" font-size="8" fill="#8a7d70" text-anchor="middle">Gabriela Rabelo</text>
 </svg>
