@@ -5,17 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gabriela Rabelo Beauty | Estética em Patrocínio-MG</title>
   <meta name="description" content="Estética Gabriela Rabelo em Patrocínio-MG. Harmonização corporal e facial com placas e ativação de colágeno. Agende sua avaliação.">
+  <meta name="theme-color" content="#fbf8f4">
   <meta property="og:title" content="Gabriela Rabelo Beauty | Estética em Patrocínio-MG">
   <meta property="og:description" content="Harmonização corporal e facial com placas e ativação de colágeno. Agende sua avaliação.">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src https://uvpnwovvhmkvttdivmfp.supabase.co; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; connect-src https://uvpnwovvhmkvttdivmfp.supabase.co; base-uri 'self'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="carregando">
+
+<!-- Preloader: monograma se desenha e a cortina sobe -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <svg class="preloader__mono" viewBox="0 0 160 120">
+    <text x="58" y="88" class="mono-g">G</text>
+    <text x="98" y="104" class="mono-r">R</text>
+  </svg>
+  <span class="preloader__linha"></span>
+  <span class="preloader__nome">Gabriela Rabelo · Beauty</span>
+</div>
+
+<div class="progresso" id="progresso" aria-hidden="true"></div>
+<div class="grao" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span>ver</span></div>
 
 <header class="topo" id="topo">
   <div class="container topo__inner">
@@ -24,12 +39,13 @@
       <span class="marca__nome">Gabriela Rabelo<small>Beauty</small></span>
     </a>
     <nav class="menu" id="menu" aria-label="Principal">
-      <a href="#procedimentos">Procedimentos</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#contato">Contato</a>
+      <a href="#procedimentos"><span data-txt="Procedimentos">Procedimentos</span></a>
+      <a href="#sobre"><span data-txt="Sobre">Sobre</span></a>
+      <a href="#como-funciona"><span data-txt="Como funciona">Como funciona</span></a>
+      <a href="#duvidas"><span data-txt="Dúvidas">Dúvidas</span></a>
+      <a href="#contato"><span data-txt="Contato">Contato</span></a>
     </nav>
-    <a href="#agendar" class="btn btn--escuro topo__cta">Agendar avaliação</a>
+    <a href="#agendar" class="btn btn--escuro topo__cta magnetico"><span>Agendar avaliação</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span>
     </button>
@@ -40,75 +56,112 @@
 
   <!-- HERO -->
   <section class="hero" id="inicio">
+    <div class="hero__orbe hero__orbe--1" aria-hidden="true"></div>
+    <div class="hero__orbe hero__orbe--2" aria-hidden="true"></div>
     <div class="container hero__grid">
       <div class="hero__texto">
-        <p class="sobretitulo">Estética facial e corporal · Patrocínio-MG</p>
-        <h1>Contorno, firmeza e pele bonita, com tratamento feito para o seu corpo.</h1>
-        <p class="hero__sub">Sou especialista em harmonização corporal e facial com placas e em protocolos de ativação de colágeno. Cada atendimento começa por uma avaliação, para indicar só o que faz sentido para você.</p>
-        <div class="hero__acoes">
-          <a href="#agendar" class="btn btn--escuro">Quero minha avaliação</a>
-          <a href="#procedimentos" class="btn btn--linha">Ver procedimentos</a>
+        <p class="sobretitulo hero__anim">Estética facial e corporal · Patrocínio-MG</p>
+        <h1 class="hero__titulo">
+          <span class="linha"><span>Contorno, firmeza</span></span>
+          <span class="linha"><span>e pele bonita,</span></span>
+          <span class="linha"><span><em>feito para você.</em></span></span>
+        </h1>
+        <p class="hero__sub hero__anim">Sou especialista em harmonização corporal e facial com placas e em protocolos de ativação de colágeno. Cada atendimento começa por uma avaliação, para indicar só o que faz sentido para o seu corpo.</p>
+        <div class="hero__acoes hero__anim">
+          <a href="#agendar" class="btn btn--escuro magnetico"><span>Quero minha avaliação</span></a>
+          <a href="#procedimentos" class="btn btn--linha magnetico"><span>Ver procedimentos</span></a>
         </div>
       </div>
       <div class="hero__visual" aria-hidden="true">
-        <div class="hero__arco">
+        <div class="hero__arco" data-parallax="-0.12">
+          <div class="hero__arco-luz"></div>
           <img src="assets/logo.svg" alt="" class="hero__logo">
         </div>
-        <div class="hero__selo">
+        <svg class="hero__anel" viewBox="0 0 200 200">
+          <defs><path id="circulo" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#circulo">avaliação personalizada · atendimento com hora marcada · </textPath></text>
+        </svg>
+        <div class="hero__selo" data-parallax="0.08">
           <strong>Avaliação</strong>
           <span>personalizada</span>
         </div>
       </div>
     </div>
+    <a href="#procedimentos" class="hero__scroll" aria-label="Rolar para procedimentos"><span></span></a>
   </section>
+
+  <!-- FAIXA -->
+  <div class="faixa" aria-hidden="true">
+    <div class="faixa__trilho">
+      <span>Harmonização corporal</span><i>✦</i>
+      <span>Harmonização facial</span><i>✦</i>
+      <span>Ativação de colágeno</span><i>✦</i>
+      <span>Avaliação personalizada</span><i>✦</i>
+      <span>Harmonização corporal</span><i>✦</i>
+      <span>Harmonização facial</span><i>✦</i>
+      <span>Ativação de colágeno</span><i>✦</i>
+      <span>Avaliação personalizada</span><i>✦</i>
+    </div>
+  </div>
 
   <!-- PROCEDIMENTOS -->
   <section class="secao" id="procedimentos">
     <div class="container">
-      <p class="sobretitulo centro">Procedimentos</p>
-      <h2 class="centro">O que eu faço por você</h2>
+      <div class="cabecalho">
+        <p class="sobretitulo">Procedimentos</p>
+        <h2 class="titulo-split">O que eu faço por você</h2>
+        <p class="cabecalho__sub">Toque em um procedimento para saber como funciona.</p>
+      </div>
 
       <div class="cards">
-        <article class="card">
-          <div class="card__img card__img--1" aria-hidden="true"><span>01</span></div>
+        <article class="card" data-cursor>
+          <div class="card__img card__img--1" aria-hidden="true"><span class="card__num">01</span><span class="card__brilho"></span></div>
           <h3>Harmonização corporal com placas</h3>
           <p>Protocolo para modelar o contorno do corpo e trabalhar áreas como abdômen, flancos, culote e glúteos.</p>
           <div class="card__acoes">
-            <button class="btn btn--linha btn--sm" data-saiba="corporal">Saiba mais</button>
-            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Harmonização corporal com placas">Falar com a especialista</a>
+            <button class="btn btn--linha btn--sm" data-saiba="corporal"><span>Saiba mais</span></button>
+            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Harmonização corporal com placas"><span>Falar com a especialista</span></a>
           </div>
         </article>
 
-        <article class="card">
-          <div class="card__img card__img--2" aria-hidden="true"><span>02</span></div>
+        <article class="card" data-cursor>
+          <div class="card__img card__img--2" aria-hidden="true"><span class="card__num">02</span><span class="card__brilho"></span></div>
           <h3>Harmonização facial com placas</h3>
           <p>Cuidado com o contorno do rosto, papada e sustentação da pele, sem perder a naturalidade da sua expressão.</p>
           <div class="card__acoes">
-            <button class="btn btn--linha btn--sm" data-saiba="facial">Saiba mais</button>
-            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Harmonização facial com placas">Falar com a especialista</a>
+            <button class="btn btn--linha btn--sm" data-saiba="facial"><span>Saiba mais</span></button>
+            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Harmonização facial com placas"><span>Falar com a especialista</span></a>
           </div>
         </article>
 
-        <article class="card">
-          <div class="card__img card__img--3" aria-hidden="true"><span>03</span></div>
+        <article class="card" data-cursor>
+          <div class="card__img card__img--3" aria-hidden="true"><span class="card__num">03</span><span class="card__brilho"></span></div>
           <h3>Ativação de colágeno</h3>
           <p>Estímulo da produção natural de colágeno para melhorar firmeza, textura e flacidez da pele.</p>
           <div class="card__acoes">
-            <button class="btn btn--linha btn--sm" data-saiba="colageno">Saiba mais</button>
-            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Ativação de colágeno">Falar com a especialista</a>
+            <button class="btn btn--linha btn--sm" data-saiba="colageno"><span>Saiba mais</span></button>
+            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Ativação de colágeno"><span>Falar com a especialista</span></a>
           </div>
         </article>
 
-        <article class="card">
-          <div class="card__img card__img--4" aria-hidden="true"><span>04</span></div>
+        <article class="card" data-cursor>
+          <div class="card__img card__img--4" aria-hidden="true"><span class="card__num">04</span><span class="card__brilho"></span></div>
           <h3>Avaliação facial e corporal</h3>
           <p>Ainda não sabe por onde começar? Na avaliação a gente conversa sobre seus objetivos e monta o plano.</p>
           <div class="card__acoes">
-            <button class="btn btn--linha btn--sm" data-saiba="avaliacao">Saiba mais</button>
-            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Avaliação (ainda não sei)">Falar com a especialista</a>
+            <button class="btn btn--linha btn--sm" data-saiba="avaliacao"><span>Saiba mais</span></button>
+            <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Avaliação (ainda não sei)"><span>Falar com a especialista</span></a>
           </div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- CITAÇÃO -->
+  <section class="citacao" aria-label="Filosofia de atendimento">
+    <div class="container">
+      <p class="citacao__texto" id="citacao">Antes de qualquer sessão, eu avalio, explico e só então indico. Sem pacote empurrado e sem promessa milagrosa.</p>
+      <span class="citacao__assina">Gabriela Rabelo</span>
     </div>
   </section>
 
@@ -116,19 +169,19 @@
   <section class="secao secao--nude" id="sobre">
     <div class="container sobre">
       <div class="sobre__foto" aria-hidden="true">
-        <span>GR</span>
+        <div class="sobre__foto-inner" data-parallax="-0.08"><span>GR</span></div>
       </div>
       <div class="sobre__texto">
         <p class="sobretitulo">Sobre mim</p>
-        <h2>Gabriela Rabelo</h2>
-        <p>Sou esteticista em Patrocínio e trabalho com harmonização corporal e facial com placas e com protocolos de ativação de colágeno.</p>
-        <p>Meu atendimento é individual. Antes de qualquer sessão eu avalio a sua pele e o seu corpo, explico o que pode ser feito, quantas sessões costumam ser necessárias e o que esperar do resultado. Sem pacote empurrado e sem promessa milagrosa.</p>
+        <h2 class="titulo-split">Gabriela Rabelo</h2>
+        <p class="sobe">Sou esteticista em Patrocínio e trabalho com harmonização corporal e facial com placas e com protocolos de ativação de colágeno.</p>
+        <p class="sobe">Meu atendimento é individual. Antes de qualquer sessão eu avalio a sua pele e o seu corpo, explico o que pode ser feito, quantas sessões costumam ser necessárias e o que esperar do resultado.</p>
         <ul class="lista-check">
-          <li>Atendimento com hora marcada</li>
-          <li>Plano de tratamento explicado antes de começar</li>
-          <li>Acompanhamento da evolução sessão a sessão</li>
+          <li class="sobe">Atendimento com hora marcada</li>
+          <li class="sobe">Plano de tratamento explicado antes de começar</li>
+          <li class="sobe">Acompanhamento da evolução sessão a sessão</li>
         </ul>
-        <a href="#agendar" class="btn btn--escuro">Agendar avaliação</a>
+        <a href="#agendar" class="btn btn--escuro magnetico sobe"><span>Agendar avaliação</span></a>
       </div>
     </div>
   </section>
@@ -136,59 +189,91 @@
   <!-- COMO FUNCIONA -->
   <section class="secao" id="como-funciona">
     <div class="container">
-      <p class="sobretitulo centro">Como funciona</p>
-      <h2 class="centro">Do primeiro contato à primeira sessão</h2>
-      <ol class="passos">
-        <li>
-          <span class="passos__num">1</span>
-          <h3>Você deixa seu contato</h3>
-          <p>Preencha o formulário abaixo com seu nome, WhatsApp e o procedimento que te interessa.</p>
-        </li>
-        <li>
-          <span class="passos__num">2</span>
-          <h3>Eu te chamo no WhatsApp</h3>
-          <p>Respondo suas dúvidas e combinamos o melhor dia e horário para a avaliação.</p>
-        </li>
-        <li>
-          <span class="passos__num">3</span>
-          <h3>Avaliação e plano</h3>
-          <p>No consultório, avalio a área, explico o protocolo indicado e você decide com calma.</p>
-        </li>
-      </ol>
+      <div class="cabecalho">
+        <p class="sobretitulo">Como funciona</p>
+        <h2 class="titulo-split">Do primeiro contato à primeira sessão</h2>
+      </div>
+      <div class="passos-wrap">
+        <svg class="passos__trilha" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="2" x2="1000" y2="2" id="trilha"/></svg>
+        <ol class="passos">
+          <li>
+            <span class="passos__num">1</span>
+            <h3>Você deixa seu contato</h3>
+            <p>Preencha o formulário com seu nome, WhatsApp e o procedimento que te interessa.</p>
+          </li>
+          <li>
+            <span class="passos__num">2</span>
+            <h3>Eu te chamo no WhatsApp</h3>
+            <p>Respondo suas dúvidas e combinamos o melhor dia e horário para a avaliação.</p>
+          </li>
+          <li>
+            <span class="passos__num">3</span>
+            <h3>Avaliação e plano</h3>
+            <p>No consultório, avalio a área, explico o protocolo indicado e você decide com calma.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÚVIDAS -->
+  <section class="secao secao--nude" id="duvidas">
+    <div class="container duvidas">
+      <div class="cabecalho cabecalho--esq">
+        <p class="sobretitulo">Dúvidas</p>
+        <h2 class="titulo-split">Perguntas que sempre me fazem</h2>
+        <p class="cabecalho__sub">Não achou a sua? Me chama no WhatsApp.</p>
+      </div>
+      <div class="acordeao">
+        <details class="sobe">
+          <summary>A avaliação é obrigatória?<i></i></summary>
+          <div class="acordeao__corpo"><p>Sim. É nela que eu vejo a sua pele e o seu corpo e defino qual protocolo faz sentido. Ninguém começa tratamento sem avaliação.</p></div>
+        </details>
+        <details class="sobe">
+          <summary>Quantas sessões vou precisar?<i></i></summary>
+          <div class="acordeao__corpo"><p>Depende da área, do objetivo e de como o seu corpo responde. Na avaliação eu passo uma estimativa e a gente acompanha a evolução a cada sessão.</p></div>
+        </details>
+        <details class="sobe">
+          <summary>Dói? Preciso parar a rotina?<i></i></summary>
+          <div class="acordeao__corpo"><p>Os protocolos são feitos para encaixar na rotina. Eu explico na avaliação o que você pode sentir durante e depois de cada procedimento.</p></div>
+        </details>
+        <details class="sobe">
+          <summary>Onde fica o atendimento?<i></i></summary>
+          <div class="acordeao__corpo"><p>Em Patrocínio-MG, com hora marcada. O endereço completo eu passo pelo WhatsApp quando a gente agenda.</p></div>
+        </details>
+      </div>
     </div>
   </section>
 
   <!-- FORMULÁRIO -->
   <section class="secao secao--escura" id="agendar">
+    <div class="agendar__brilho" aria-hidden="true"></div>
     <div class="container agendar">
       <div class="agendar__texto">
         <p class="sobretitulo sobretitulo--claro">Agende sua avaliação</p>
-        <h2>Deixe seu contato que eu falo com você</h2>
-        <p>Leva menos de um minuto. Depois de enviar, o WhatsApp abre com a sua mensagem pronta para a gente continuar a conversa.</p>
+        <h2 class="titulo-split">Deixe seu contato que eu falo com você</h2>
+        <p class="sobe">Leva menos de um minuto. Depois de enviar, o WhatsApp abre para a gente continuar a conversa.</p>
       </div>
 
       <form class="form" id="formLead" novalidate>
         <div class="campo">
+          <input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required placeholder=" ">
           <label for="nome">Seu nome</label>
-          <input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required placeholder="Como posso te chamar?">
           <small class="erro" data-erro="nome"></small>
         </div>
         <div class="campo">
-          <label for="whatsapp">WhatsApp</label>
-          <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" required placeholder="(34) 99999-9999">
+          <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" required placeholder=" ">
+          <label for="whatsapp">WhatsApp com DDD</label>
           <small class="erro" data-erro="whatsapp"></small>
         </div>
-        <div class="campo">
-          <label for="procedimento">Procedimento de interesse</label>
-          <select id="procedimento" name="procedimento" required>
-            <option value="">Escolha uma opção</option>
-            <option>Harmonização corporal com placas</option>
-            <option>Harmonização facial com placas</option>
-            <option>Ativação de colágeno</option>
-            <option>Avaliação (ainda não sei)</option>
-          </select>
-          <small class="erro" data-erro="procedimento"></small>
-        </div>
+        <fieldset class="chips">
+          <legend>Procedimento de interesse</legend>
+          <label><input type="radio" name="procedimento" value="Harmonização corporal com placas"><span>Corporal com placas</span></label>
+          <label><input type="radio" name="procedimento" value="Harmonização facial com placas"><span>Facial com placas</span></label>
+          <label><input type="radio" name="procedimento" value="Ativação de colágeno"><span>Ativação de colágeno</span></label>
+          <label><input type="radio" name="procedimento" value="Avaliação (ainda não sei)"><span>Ainda não sei</span></label>
+        </fieldset>
+        <small class="erro" data-erro="procedimento"></small>
         <!-- honeypot: humanos não veem este campo -->
         <div class="hp" aria-hidden="true">
           <label for="empresa">Empresa</label>
@@ -199,8 +284,14 @@
           <span>Autorizo o uso do meu nome e WhatsApp para contato sobre agendamento, conforme a <a href="#privacidade">política de privacidade</a>.</span>
         </label>
         <small class="erro" data-erro="consentimento"></small>
-        <button type="submit" class="btn btn--dourado btn--bloco" id="btnEnviar">Quero ser chamada no WhatsApp</button>
+        <button type="submit" class="btn btn--dourado btn--bloco" id="btnEnviar"><span>Quero ser chamada no WhatsApp</span></button>
         <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        <div class="form__ok" id="formOk" hidden>
+          <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+          <h3>Recebi seu contato!</h3>
+          <p id="formOkTexto">Abrindo o WhatsApp para a gente continuar…</p>
+          <a class="btn btn--dourado" id="formOkLink" target="_blank" rel="noopener"><span>Abrir WhatsApp</span></a>
+        </div>
       </form>
     </div>
   </section>
@@ -210,17 +301,17 @@
     <div class="container contato">
       <div>
         <p class="sobretitulo">Contato</p>
-        <h2>Onde me encontrar</h2>
-        <p class="contato__local">Patrocínio, Minas Gerais<br><span class="muted">Atendimento com hora marcada</span></p>
+        <h2 class="titulo-split">Onde me encontrar</h2>
+        <p class="contato__local sobe">Patrocínio, Minas Gerais<br><span class="muted">Atendimento com hora marcada</span></p>
       </div>
       <div class="contato__links">
-        <a class="contato__item" href="https://whats.link/gabrielarabelobeauty1" target="_blank" rel="noopener">
+        <a class="contato__item sobe" href="https://whats.link/gabrielarabelobeauty1" target="_blank" rel="noopener">
           <span class="contato__rotulo">WhatsApp</span>
-          <span>Chamar agora →</span>
+          <span class="contato__seta">Chamar agora <b>→</b></span>
         </a>
-        <a class="contato__item" href="https://www.instagram.com/gabrielarabelobeauty/" target="_blank" rel="noopener">
+        <a class="contato__item sobe" href="https://www.instagram.com/gabrielarabelobeauty/" target="_blank" rel="noopener">
           <span class="contato__rotulo">Instagram</span>
-          <span>@gabrielarabelobeauty →</span>
+          <span class="contato__seta">@gabrielarabelobeauty <b>→</b></span>
         </a>
       </div>
     </div>
@@ -229,29 +320,33 @@
 </main>
 
 <footer class="rodape">
-  <div class="container rodape__inner">
-    <div class="marca marca--rodape">
-      <img src="assets/logo.svg" alt="" width="36" height="36">
-      <span class="marca__nome">Gabriela Rabelo<small>Beauty</small></span>
+  <div class="container">
+    <p class="rodape__gigante" aria-hidden="true">Gabriela Rabelo</p>
+    <div class="rodape__inner">
+      <p id="privacidade" class="rodape__priv">
+        <strong>Privacidade.</strong> Os dados enviados pelo formulário (nome, WhatsApp e procedimento de interesse) são usados apenas para entrar em contato sobre o seu agendamento e não são repassados a terceiros. Para pedir a exclusão dos seus dados, fale comigo pelo WhatsApp.
+      </p>
+      <p class="rodape__copy">© <span id="ano">2026</span> Estética Gabriela Rabelo · Patrocínio-MG</p>
     </div>
-    <p id="privacidade" class="rodape__priv">
-      <strong>Privacidade.</strong> Os dados enviados pelo formulário (nome, WhatsApp e procedimento de interesse) são usados apenas para entrar em contato sobre o seu agendamento e não são repassados a terceiros. Para pedir a exclusão dos seus dados, fale comigo pelo WhatsApp.
-    </p>
-    <p class="rodape__copy">© <span id="ano">2026</span> Estética Gabriela Rabelo · Patrocínio-MG</p>
   </div>
 </footer>
 
 <a class="whats-flutuante" href="https://whats.link/gabrielarabelobeauty1" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3 29l6.5-2c2 1.1 4.2 1.6 6.5 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.3c-2.1 0-4.1-.6-5.8-1.6l-.4-.3-3.9 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.3 16 26.3zm6-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.8 1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
+  <span class="whats-flutuante__pulso"></span>
 </a>
 
 <dialog class="modal" id="modal">
   <button class="modal__fechar" id="modalFechar" aria-label="Fechar">×</button>
+  <p class="sobretitulo">Procedimento</p>
   <h3 id="modalTitulo"></h3>
   <div id="modalCorpo"></div>
-  <a href="#agendar" class="btn btn--escuro" id="modalCta">Quero agendar</a>
+  <a href="#agendar" class="btn btn--escuro" id="modalCta"><span>Quero agendar</span></a>
 </dialog>
 
-<script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous" defer></script>
+<script src="app.js" defer></script>
 </body>
 </html>
