@@ -13,7 +13,12 @@
 
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const reduzir = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Muitos Windows vêm com "Mostrar animações" desligado e o navegador passa a
+  // reportar prefers-reduced-motion sem a pessoa ter pedido. As revelações rodam
+  // sempre; com a preferência ativa cortamos só o que mexe muito: rolagem suave,
+  // parallax, inclinação dos cards e cursor.
+  const movimentoReduzido = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduzir = false;
   const desktop = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const temGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
 
@@ -21,7 +26,7 @@
 
   /* ---------------- Rolagem suave (Lenis) ---------------- */
   let lenis = null;
-  if (!reduzir && typeof window.Lenis !== "undefined") {
+  if (!movimentoReduzido && typeof window.Lenis !== "undefined") {
     lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
     if (temGsap) {
       lenis.on("scroll", ScrollTrigger.update);
@@ -200,7 +205,7 @@
       clipPath: "inset(0% 0% 100% 0% round 20px)", duration: 1.6, ease: "expo.inOut",
       scrollTrigger: { trigger: ".sobre__foto", start: "top 80%" }
     });
-    $$("[data-parallax]").forEach(el => {
+    if (!movimentoReduzido) $$("[data-parallax]").forEach(el => {
       const v = parseFloat(el.dataset.parallax);
       gsap.to(el, {
         y: () => v * window.innerHeight, ease: "none",
@@ -250,7 +255,7 @@
   }
 
   /* ---------------- Interações de desktop ---------------- */
-  if (desktop && !reduzir && temGsap) {
+  if (desktop && !movimentoReduzido && temGsap) {
     // Cursor
     const cursor = $("#cursor");
     const cx = gsap.quickTo(cursor, "x", { duration: .45, ease: "power3" });

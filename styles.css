@@ -477,10 +477,8 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
 
 /* ---------- Movimento reduzido ---------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .grao, .hero__arco-luz { display: none; }
-  .citacao__texto .w { opacity: 1; }
-  .passos__trilha line { stroke-dashoffset: 0; }
+  .hero__anel, .hero__scroll span { animation: none; }
 }
 
 /* ---------- Responsivo ---------- */
