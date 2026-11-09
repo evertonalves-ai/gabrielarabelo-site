@@ -1,10 +1,10 @@
 (() => {
   "use strict";
 
-  // Chave publicável: só permite INSERT na tabela leads_gabriela (RLS + grants por coluna).
-  const SUPABASE_URL = "https://yapabpulmdcbfwwntpen.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_iSTST0HwhCB1hXAUYZj-yA_1dl6dbxt";
-  const TABELA = "leads_gabriela";
+  // Chave publicável: só permite INSERT na tabela leads (RLS + grants por coluna).
+  const SUPABASE_URL = "https://uvpnwovvhmkvttdivmfp.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_YzPaf__gl-4jV-GrxkxJZQ_yDE4czVD";
+  const TABELA = "leads";
 
   // Quando tiver o número da Gabriela (só dígitos, com DDI: 5534999999999),
   // preencha aqui e o WhatsApp abre com a mensagem já escrita.
