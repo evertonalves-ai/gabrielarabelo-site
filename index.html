@@ -112,8 +112,10 @@
         <h2 class="titulo-split">O que eu faço por você</h2>
         <p class="cabecalho__sub">Toque em um procedimento para saber como funciona.</p>
       </div>
-
-      <div class="cards">
+      <div class="proc-contador" aria-hidden="true"><span id="procAtual">01</span><i><b id="procBarra"></b></i><span>04</span></div>
+    </div>
+    <div class="cards-viewport">
+      <div class="cards" id="cardsTrilho">
         <article class="card" data-cursor>
           <div class="card__img card__img--1" aria-hidden="true"><span class="card__num">01</span><span class="card__brilho"></span></div>
           <h3>Harmonização corporal com placas</h3>
@@ -153,6 +155,65 @@
             <a href="#agendar" class="btn btn--escuro btn--sm" data-proc="Avaliação (ainda não sei)"><span>Falar com a especialista</span></a>
           </div>
         </article>
+
+        <article class="card card--cta">
+          <p class="sobretitulo sobretitulo--claro">Teste rápido</p>
+          <h3>Não sabe qual escolher?</h3>
+          <p>Responda 3 perguntas e veja por onde faz mais sentido começar.</p>
+          <a href="#quiz" class="btn btn--dourado"><span>Fazer o teste</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="secao secao--nude quiz-secao" id="quiz">
+    <div class="container">
+      <div class="cabecalho">
+        <p class="sobretitulo">Teste de 30 segundos</p>
+        <h2 class="titulo-split">Qual protocolo combina com você?</h2>
+      </div>
+      <div class="quiz" id="quizBox">
+        <div class="quiz__topo">
+          <span class="quiz__passo" id="quizPasso">Pergunta 1 de 3</span>
+          <span class="quiz__barra"><b id="quizBarra"></b></span>
+        </div>
+        <div class="quiz__palco" id="quizPalco">
+          <div class="quiz__tela ativa" data-q="area">
+            <h3>Onde você quer cuidar?</h3>
+            <div class="quiz__opcoes">
+              <button type="button" data-v="Rosto"><i>◐</i>Rosto</button>
+              <button type="button" data-v="Corpo"><i>◑</i>Corpo</button>
+              <button type="button" data-v="Rosto e corpo"><i>●</i>Os dois</button>
+            </div>
+          </div>
+          <div class="quiz__tela" data-q="incomodo">
+            <h3>O que mais te incomoda hoje?</h3>
+            <div class="quiz__opcoes">
+              <button type="button" data-v="Flacidez"><i>↧</i>Flacidez, pele sem firmeza</button>
+              <button type="button" data-v="Contorno"><i>◇</i>Contorno e medidas</button>
+              <button type="button" data-v="Textura"><i>✧</i>Textura da pele e linhas</button>
+              <button type="button" data-v="Não sei"><i>?</i>Não sei dizer</button>
+            </div>
+          </div>
+          <div class="quiz__tela" data-q="experiencia">
+            <h3>Você já fez algum procedimento estético?</h3>
+            <div class="quiz__opcoes">
+              <button type="button" data-v="Primeira vez"><i>1</i>Nunca, seria a primeira vez</button>
+              <button type="button" data-v="Já fez"><i>+</i>Já fiz alguns</button>
+            </div>
+          </div>
+          <div class="quiz__tela quiz__resultado" data-q="resultado">
+            <p class="sobretitulo">Seu ponto de partida</p>
+            <h3 id="quizTitulo"></h3>
+            <p id="quizTexto"></p>
+            <p class="quiz__aviso">É uma sugestão inicial. A indicação final sai da avaliação presencial.</p>
+            <div class="quiz__acoes">
+              <a href="#agendar" class="btn btn--escuro" id="quizCta"><span>Quero agendar minha avaliação</span></a>
+              <button type="button" class="btn btn--linha" id="quizRefazer"><span>Refazer</span></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -335,6 +396,22 @@
   <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 6.9L3 29l6.5-2c2 1.1 4.2 1.6 6.5 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.3c-2.1 0-4.1-.6-5.8-1.6l-.4-.3-3.9 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.7C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.3 16 26.3zm6-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.8 1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 2.2.9 3 1 4.1.8.7-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></svg>
   <span class="whats-flutuante__pulso"></span>
 </a>
+
+<div class="barra-cta" id="barraCta" aria-hidden="true">
+  <span>Avaliação personalizada</span>
+  <a href="#agendar" class="btn btn--dourado btn--sm" tabindex="-1"><span>Agendar</span></a>
+</div>
+
+<dialog class="modal modal--saida" id="modalSaida">
+  <button class="modal__fechar" data-fechar aria-label="Fechar">×</button>
+  <p class="sobretitulo">Antes de ir</p>
+  <h3>Descubra em 30 segundos por onde começar</h3>
+  <p>São só 3 perguntas, sem precisar deixar contato. No fim você vê qual protocolo faz mais sentido para o seu caso.</p>
+  <div class="quiz__acoes">
+    <a href="#quiz" class="btn btn--escuro" id="saidaQuiz"><span>Fazer o teste</span></a>
+    <button type="button" class="btn btn--linha" data-fechar><span>Agora não</span></button>
+  </div>
+</dialog>
 
 <dialog class="modal" id="modal">
   <button class="modal__fechar" id="modalFechar" aria-label="Fechar">×</button>

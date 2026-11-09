@@ -134,6 +134,44 @@
     // Barra de progresso
     gsap.to("#progresso", { scaleX: 1, ease: "none", scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: .3 } });
 
+    // Procedimentos: no desktop a seção trava e os cards correm na horizontal
+    const secProc = $("#procedimentos");
+    const trilho = $("#cardsTrilho");
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 1081px)", () => {
+      secProc.classList.add("horizontal");
+      const distancia = () => Math.max(0, trilho.scrollWidth - window.innerWidth);
+      const atual = $("#procAtual");
+      const barra = $("#procBarra");
+      gsap.to(trilho, {
+        x: () => -distancia(), ease: "none",
+        scrollTrigger: {
+          trigger: secProc, start: "top top", end: () => "+=" + distancia(),
+          pin: true, scrub: 1, invalidateOnRefresh: true, refreshPriority: 1,
+          onUpdate: st => {
+            atual.textContent = "0" + Math.min(4, Math.floor(st.progress * 4) + 1);
+            gsap.set(barra, { scaleX: .25 + st.progress * .75 });
+          }
+        }
+      });
+      gsap.timeline({ scrollTrigger: { trigger: secProc, start: "top 70%" } })
+        .from(".card", { y: 90, rotateX: 14, opacity: 0, duration: 1.3, ease: "expo.out", stagger: .1 })
+        .from(".card__img", { clipPath: "inset(100% 0% 0% 0% round 14px)", duration: 1.4, ease: "expo.inOut", stagger: .1 }, .15);
+      return () => secProc.classList.remove("horizontal");
+    });
+    mm.add("(max-width: 1080px)", () => {
+      gsap.from(".card", {
+        y: 90, rotateX: 14, opacity: 0, duration: 1.3, ease: "expo.out", stagger: .12,
+        scrollTrigger: { trigger: ".cards", start: "top 82%" }
+      });
+      $$(".card__img").forEach(img => {
+        gsap.from(img, {
+          clipPath: "inset(100% 0% 0% 0% round 14px)", duration: 1.4, ease: "expo.inOut",
+          scrollTrigger: { trigger: img, start: "top 88%" }
+        });
+      });
+    });
+
     // Títulos palavra por palavra
     $$(".titulo-split").forEach(el => {
       gsap.fromTo($$(".palavra > span", el), { y: 0, yPercent: 110 }, {
@@ -150,17 +188,6 @@
       once: true
     });
 
-    // Cards: entram em perspectiva e a imagem se revela
-    gsap.from(".card", {
-      y: 90, rotateX: 14, opacity: 0, duration: 1.3, ease: "expo.out", stagger: .12,
-      scrollTrigger: { trigger: ".cards", start: "top 82%" }
-    });
-    $$(".card__img").forEach(img => {
-      gsap.from(img, {
-        clipPath: "inset(100% 0% 0% 0% round 14px)", duration: 1.4, ease: "expo.inOut",
-        scrollTrigger: { trigger: img, start: "top 88%" }
-      });
-    });
 
     // Citação acende palavra por palavra conforme rola
     gsap.to("#citacao .w", {
@@ -327,6 +354,119 @@
   modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
   $("#modalCta").addEventListener("click", () => { modal.close(); escolherProcedimento(procModal); });
 
+  /* ---------------- Quiz ---------------- */
+  let quizFeito = false;
+  let leadEnviado = false;
+  let quizResumo = "";
+  const respostas = {};
+  const telas = $$(".quiz__tela");
+  const ordem = ["area", "incomodo", "experiencia", "resultado"];
+  let telaAtual = 0;
+  let procQuiz = "Avaliação (ainda não sei)";
+
+  function recomendar() {
+    const { area, incomodo } = respostas;
+    if (area === "Rosto e corpo" || incomodo === "Não sei") return {
+      proc: "Avaliação (ainda não sei)",
+      titulo: "Avaliação facial e corporal",
+      texto: "Como você quer cuidar de mais de uma coisa, o melhor começo é a avaliação completa. Nela eu vejo rosto e corpo e monto um plano com a ordem certa dos protocolos."
+    };
+    if (incomodo === "Flacidez" || incomodo === "Textura") return {
+      proc: "Ativação de colágeno",
+      titulo: "Ativação de colágeno",
+      texto: area === "Rosto"
+        ? "Firmeza e textura no rosto costumam responder bem aos protocolos de ativação de colágeno, que estimulam a pele a produzir mais colágeno ao longo das sessões."
+        : "Para firmeza e textura no corpo, a ativação de colágeno costuma ser o ponto de partida. Dá para combinar com a harmonização com placas depois."
+    };
+    if (area === "Corpo") return {
+      proc: "Harmonização corporal com placas",
+      titulo: "Harmonização corporal com placas",
+      texto: "Para contorno e medidas, a harmonização corporal com placas trabalha regiões como abdômen, flancos, culote e glúteos."
+    };
+    return {
+      proc: "Harmonização facial com placas",
+      titulo: "Harmonização facial com placas",
+      texto: "Para o contorno do rosto e a região da papada, a harmonização facial com placas é o caminho mais indicado para começar."
+    };
+  }
+
+  function irTela(i) {
+    const de = telas[telaAtual];
+    const para = telas[i];
+    const avancar = i > telaAtual;
+    telaAtual = i;
+    $("#quizPasso").textContent = i < 3 ? `Pergunta ${i + 1} de 3` : "Resultado";
+    $("#quizBarra").style.transform = `scaleX(${i < 3 ? .05 + i * .32 : 1})`;
+    if (!temGsap || reduzir) {
+      de.classList.remove("ativa");
+      para.classList.add("ativa");
+      return;
+    }
+    gsap.timeline()
+      .to(de, { x: avancar ? -60 : 60, opacity: 0, duration: .45, ease: "power3.in", onComplete: () => de.classList.remove("ativa") })
+      .add(() => para.classList.add("ativa"))
+      .fromTo(para, { x: avancar ? 60 : -60, opacity: 0 }, { x: 0, opacity: 1, duration: .7, ease: "expo.out" })
+      .from($$("h3, .quiz__opcoes button, p, .quiz__acoes", para), { y: 24, opacity: 0, duration: .6, ease: "expo.out", stagger: .06 }, "-=.55");
+  }
+
+  let trocando = false;
+  $$(".quiz__opcoes button").forEach(b => b.addEventListener("click", () => {
+    if (trocando) return;
+    trocando = true;
+    const tela = b.closest(".quiz__tela");
+    $$("button", tela).forEach(x => x.classList.remove("escolhida"));
+    b.classList.add("escolhida");
+    respostas[tela.dataset.q] = b.dataset.v;
+    if (tela.dataset.q === "experiencia") {
+      const r = recomendar();
+      procQuiz = r.proc;
+      $("#quizTitulo").textContent = r.titulo;
+      $("#quizTexto").textContent = r.texto;
+      quizResumo = `${respostas.area} | ${respostas.incomodo} | ${respostas.experiencia} -> ${r.proc}`.slice(0, 300);
+      quizFeito = true;
+    }
+    setTimeout(() => irTela(ordem.indexOf(tela.dataset.q) + 1), 380);
+    setTimeout(() => { trocando = false; }, 1300);
+  }));
+  $("#quizRefazer").addEventListener("click", () => {
+    $$(".quiz__opcoes button").forEach(x => x.classList.remove("escolhida"));
+    irTela(0);
+  });
+  $("#quizCta").addEventListener("click", () => escolherProcedimento(procQuiz));
+
+  /* ---------------- Barra fixa no celular ---------------- */
+  const barraCta = $("#barraCta");
+  let formNaTela = false;
+  function atualizarBarra() {
+    const mostrar = window.scrollY > window.innerHeight * .8 && !formNaTela && !leadEnviado;
+    barraCta.classList.toggle("visivel", mostrar);
+    document.body.classList.toggle("com-barra", mostrar);
+  }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(es => { formNaTela = es.some(e => e.isIntersecting); atualizarBarra(); }, { threshold: .15 })
+      .observe($("#agendar"));
+  }
+  window.addEventListener("scroll", atualizarBarra, { passive: true });
+
+  /* ---------------- Aviso de saída (desktop, uma vez por visita) ---------------- */
+  const modalSaida = $("#modalSaida");
+  const inicio = Date.now();
+  function jaMostrou() { try { return sessionStorage.getItem("gr_saida") === "1"; } catch { return false; } }
+  function marcarMostrou() { try { sessionStorage.setItem("gr_saida", "1"); } catch { /* sem storage */ } }
+  if (desktop) {
+    document.addEventListener("mouseout", e => {
+      if (e.relatedTarget || e.clientY > 8) return;
+      if (Date.now() - inicio < 8000 || quizFeito || leadEnviado || jaMostrou() || modal.open) return;
+      marcarMostrou();
+      modalSaida.showModal();
+      if (lenis) lenis.stop();
+    });
+  }
+  $$("[data-fechar]", modalSaida).forEach(b => b.addEventListener("click", () => modalSaida.close()));
+  modalSaida.addEventListener("click", e => { if (e.target === modalSaida) modalSaida.close(); });
+  modalSaida.addEventListener("close", () => { if (lenis) lenis.start(); });
+  $("#saidaQuiz").addEventListener("click", () => modalSaida.close());
+
   /* ---------------- Formulário ---------------- */
   const form = $("#formLead");
   const status = $("#formStatus");
@@ -381,6 +521,7 @@
         whatsapp: "55" + dados.whatsapp,
         procedimento: dados.procedimento,
         origem,
+        quiz: quizResumo || null,
         consentimento: true
       })
     });
@@ -425,6 +566,7 @@
       ? (WHATSAPP_NUMERO ? "Abrindo o WhatsApp para a gente continuar…" : "Abrindo o WhatsApp. Sua mensagem já foi copiada, é só colar e enviar.")
       : "Não consegui registrar agora, mas você pode falar direto comigo pelo WhatsApp.";
     $("#formOk").hidden = false;
+    if (salvo) { leadEnviado = true; atualizarBarra(); }
 
     form.reset();
     btn.disabled = false;
