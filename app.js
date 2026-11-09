@@ -136,8 +136,8 @@
 
     // Títulos palavra por palavra
     $$(".titulo-split").forEach(el => {
-      gsap.from($$(".palavra > span", el), {
-        yPercent: 110, duration: 1.1, ease: "expo.out", stagger: .06,
+      gsap.fromTo($$(".palavra > span", el), { y: 0, yPercent: 110 }, {
+        y: 0, yPercent: 0, duration: 1.1, ease: "expo.out", stagger: .06, clearProps: "transform",
         scrollTrigger: { trigger: el, start: "top 85%" }
       });
     });
