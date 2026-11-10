@@ -1,0 +1,47 @@
+name: Relatório semanal de leads
+
+on:
+  schedule:
+    # Segunda-feira 11:00 UTC = 08:00 em Brasília
+    - cron: "0 11 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write  # só para o commit de keepalive abaixo
+
+jobs:
+  relatorio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install --disable-pip-version-check -q openpyxl==3.1.5 requests==2.32.3
+
+      - name: Gerar planilha e enviar e-mail
+        env:
+          SUPABASE_URL: https://kjcmorylizjelnnfjbas.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          LEAD_EMAIL_TO: ${{ secrets.LEAD_EMAIL_TO }}
+        run: python scripts/relatorio_leads.py
+
+      # O GitHub desliga agendamentos de repositório público após 60 dias sem commit.
+      # Um commit vazio a cada ~45 dias mantém o relatório rodando.
+      - name: Manter agendamento ativo
+        if: github.event_name == 'schedule'
+        run: |
+          ultimo=$(git log -1 --format=%ct)
+          agora=$(date +%s)
+          if [ $(( (agora - ultimo) / 86400 )) -ge 45 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "chore: manter relatório semanal ativo"
+            git push
+          fi
