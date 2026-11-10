@@ -2,8 +2,8 @@
   "use strict";
 
   // Chave publicável: só permite INSERT na tabela leads (RLS + grants por coluna).
-  const SUPABASE_URL = "https://uvpnwovvhmkvttdivmfp.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_YzPaf__gl-4jV-GrxkxJZQ_yDE4czVD";
+  const SUPABASE_URL = "https://kjcmorylizjelnnfjbas.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_JTFPBNC2iM1LXi0IDYxSfQ_HPAH6BB0";
   const TABELA = "leads";
 
   // Quando tiver o número da Gabriela (só dígitos, com DDI: 5534999999999),
