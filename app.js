@@ -473,6 +473,33 @@
   modalSaida.addEventListener("close", () => { if (lenis) lenis.start(); });
   $("#saidaQuiz").addEventListener("click", () => modalSaida.close());
 
+  /* ---------------- Séries: ampliar imagem ---------------- */
+  const modalFoto = $("#modalFoto");
+  const fotoImg = $("#modalFotoImg");
+  let serieAtual = [], fotoIdx = 0;
+
+  function mostrarFoto(i) {
+    fotoIdx = (i + serieAtual.length) % serieAtual.length;
+    const img = serieAtual[fotoIdx];
+    fotoImg.src = img.currentSrc || img.src;
+    fotoImg.alt = img.alt;
+  }
+  $$("[data-ampliar]").forEach(b => b.addEventListener("click", () => {
+    serieAtual = $$("img", b.closest(".serie__trilho"));
+    mostrarFoto(serieAtual.indexOf($("img", b)));
+    modalFoto.showModal();
+    if (lenis) lenis.stop();
+  }));
+  $("#fotoAnt").addEventListener("click", () => mostrarFoto(fotoIdx - 1));
+  $("#fotoProx").addEventListener("click", () => mostrarFoto(fotoIdx + 1));
+  modalFoto.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft") mostrarFoto(fotoIdx - 1);
+    if (e.key === "ArrowRight") mostrarFoto(fotoIdx + 1);
+  });
+  $("[data-fechar]", modalFoto).addEventListener("click", () => modalFoto.close());
+  modalFoto.addEventListener("click", e => { if (e.target === modalFoto) modalFoto.close(); });
+  modalFoto.addEventListener("close", () => { if (lenis) lenis.start(); });
+
   /* ---------------- Formulário ---------------- */
   const form = $("#formLead");
   const status = $("#formStatus");

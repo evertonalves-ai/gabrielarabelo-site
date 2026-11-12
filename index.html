@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body class="carregando">
 
@@ -40,6 +40,7 @@
     </a>
     <nav class="menu" id="menu" aria-label="Principal">
       <a href="#procedimentos"><span data-txt="Procedimentos">Procedimentos</span></a>
+      <a href="#tratamentos"><span data-txt="Tratamentos">Tratamentos</span></a>
       <a href="#sobre"><span data-txt="Sobre">Sobre</span></a>
       <a href="#como-funciona"><span data-txt="Como funciona">Como funciona</span></a>
       <a href="#duvidas"><span data-txt="Dúvidas">Dúvidas</span></a>
@@ -166,6 +167,42 @@
     </div>
   </section>
 
+  <!-- ENTENDA OS TRATAMENTOS: séries publicadas no Instagram -->
+  <section class="secao secao--rose" id="tratamentos">
+    <div class="container">
+      <div class="cabecalho">
+        <p class="sobretitulo">Entenda os tratamentos</p>
+        <h2 class="titulo-split">Antes de agendar, veja como funciona</h2>
+        <p class="cabecalho__sub sobe">Deslize para ver cada série. Toque numa imagem para ampliar.</p>
+      </div>
+
+      <div class="serie sobe">
+        <div class="serie__topo">
+          <h3>Ultrassom microfocado</h3>
+          <a href="#agendar" class="btn btn--linha btn--sm" data-proc="Ativação de colágeno"><span>Quero saber se é para mim</span></a>
+        </div>
+        <ol class="serie__trilho" aria-label="Série: ultrassom microfocado">
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/ultrassom-1-capa.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Ultrassom microfocado: tecnologia que estimula o colágeno e contribui para mais firmeza e definição."></button></li>
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/ultrassom-2-energia.webp" width="494" height="544" loading="lazy" decoding="async" alt="O ultrassom microfocado leva energia até planos específicos do tecido, sem lesionar toda a superfície da pele. O aquecimento é pontual e controlado."></button></li>
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/ultrassom-3-ponto-focal.webp" width="516" height="487" loading="lazy" decoding="async" alt="No ponto focal, a energia ultrassônica é convertida em calor."></button></li>
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/ultrassom-4-resultados.webp" width="497" height="482" loading="lazy" decoding="async" alt="Resultados que vão além da superfície: estimula o colágeno, melhora a firmeza, contribui para o contorno facial, com resultados progressivos."></button></li>
+        </ol>
+      </div>
+
+      <div class="serie sobe">
+        <div class="serie__topo">
+          <h3>Flacidez depois das canetinhas</h3>
+          <a href="#agendar" class="btn btn--linha btn--sm" data-proc="Avaliação (ainda não sei)"><span>Agendar avaliação</span></a>
+        </div>
+        <ol class="serie__trilho" aria-label="Série: flacidez depois do emagrecimento">
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/flacidez-1-capa.webp" width="900" height="1125" loading="lazy" decoding="async" alt="Emagreceu com as canetinhas, mas a flacidez apareceu? Cuide da sua pele e recupere a firmeza."></button></li>
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/flacidez-2-regioes.webp" width="517" height="489" loading="lazy" decoding="async" alt="Algumas regiões evidenciam mais a flacidez depois do emagrecimento: braços, abdômen, coxas e glúteos."></button></li>
+          <li><button type="button" class="serie__item" data-ampliar><img src="assets/img/flacidez-3-estrategia.webp" width="494" height="490" loading="lazy" decoding="async" alt="Flacidez não se trata com uma receita pronta: bioestimuladores, radiofrequência microagulhada, HIFU, tecnologias combinadas e protocolos associados."></button></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
   <!-- QUIZ -->
   <section class="secao secao--nude quiz-secao" id="quiz">
     <div class="container">
@@ -229,8 +266,10 @@
   <!-- SOBRE -->
   <section class="secao secao--nude" id="sobre">
     <div class="container sobre">
-      <div class="sobre__foto" aria-hidden="true">
-        <div class="sobre__foto-inner" data-parallax="-0.08"><span>GR</span></div>
+      <div class="sobre__foto">
+        <div class="sobre__foto-inner" data-parallax="-0.08">
+          <img src="assets/img/gabriela-rabelo.webp" alt="Gabriela Rabelo, esteticista em Patrocínio-MG" width="620" height="775" loading="lazy" decoding="async">
+        </div>
       </div>
       <div class="sobre__texto">
         <p class="sobretitulo">Sobre mim</p>
@@ -421,9 +460,18 @@
   <a href="#agendar" class="btn btn--escuro" id="modalCta"><span>Quero agendar</span></a>
 </dialog>
 
+<dialog class="modal modal--foto" id="modalFoto" aria-label="Imagem ampliada">
+  <button class="modal__fechar" data-fechar aria-label="Fechar">×</button>
+  <img id="modalFotoImg" src="" alt="">
+  <div class="modal--foto__nav">
+    <button type="button" class="btn btn--linha btn--sm" id="fotoAnt" aria-label="Imagem anterior"><span>‹ Anterior</span></button>
+    <button type="button" class="btn btn--linha btn--sm" id="fotoProx" aria-label="Próxima imagem"><span>Próxima ›</span></button>
+  </div>
+</dialog>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous" defer></script>
-<script src="app.js?v=7" defer></script>
+<script src="app.js?v=8" defer></script>
 </body>
 </html>
