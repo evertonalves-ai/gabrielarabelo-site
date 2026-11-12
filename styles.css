@@ -548,3 +548,64 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
   .acordeao summary { font-size: 1.25rem; }
   .contato__item { flex-direction: column; align-items: flex-start; gap: .3rem; }
 }
+
+/* ---------- Página Links da Gabi (/links) ---------- */
+.links-pagina { background: linear-gradient(180deg, #f7ecec 0%, var(--nude) 100%); min-height: 100vh; }
+.links { max-width: 480px; margin: 0 auto; padding: 3rem 16px 2.5rem; text-align: center; }
+.links__foto { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; margin: 0 auto 1.1rem; border: 3px solid #fff; box-shadow: 0 12px 30px -14px rgba(110,40,60,.5); }
+.links__nome { font-family: var(--serif); font-weight: 400; font-size: 2rem; color: var(--grafite); }
+.links__sub { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
+.links__lista { display: grid; gap: .8rem; margin: 2rem 0 1.8rem; }
+.links__item {
+  display: block; text-decoration: none; background: #fff; border-radius: 16px; padding: 1rem 1.2rem;
+  box-shadow: 0 8px 24px -16px rgba(110,40,60,.45); transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.links__item:hover, .links__item:focus-visible { transform: translateY(-3px); box-shadow: 0 14px 30px -16px rgba(110,40,60,.55); }
+.links__item:focus-visible { outline: 2px solid var(--dourado); outline-offset: 3px; }
+.links__titulo { display: block; font-weight: 600; font-size: .95rem; color: var(--grafite); }
+.links__desc { display: block; font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+.links__item--destaque { background: var(--grafite); }
+.links__item--destaque .links__titulo { color: var(--creme); }
+.links__item--destaque .links__desc { color: var(--dourado-2); }
+.links__aviso { font-size: .74rem; color: var(--muted); line-height: 1.6; }
+.links__copy { font-size: .7rem; color: var(--muted); margin-top: 1.4rem; letter-spacing: .08em; }
+
+/* ---------- Achadinhos da Gabi (/achadinhos) ---------- */
+.achados-pagina [hidden] { display: none !important; }
+.achados-pagina { background: linear-gradient(180deg, #f7ecec 0%, var(--creme) 40%); min-height: 100vh; }
+.achados-topo { max-width: 1180px; margin: 0 auto; padding: 1.2rem 16px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.achados { max-width: 1180px; margin: 0 auto; padding: 2rem 16px 4rem; }
+.achados__intro { text-align: center; max-width: 680px; margin: 0 auto 2.4rem; }
+.achados__intro h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.1; color: var(--grafite); margin: .6rem 0 1rem; }
+.achados__sub { color: var(--muted); margin-bottom: 1.6rem; }
+.achados__filtros { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: 2rem; }
+.achados__chip {
+  font: 500 .78rem var(--sans); letter-spacing: .04em; padding: .55rem 1.1rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--nude-2); background: #fff; color: var(--grafite-2); transition: background .3s, color .3s, border-color .3s;
+}
+.achados__chip[aria-pressed="true"] { background: var(--grafite); border-color: var(--grafite); color: var(--creme); }
+.achados__grade { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.2rem; }
+.achado {
+  background: #fff; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
+  box-shadow: 0 12px 30px -20px rgba(110,40,60,.5); transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.achado:hover { transform: translateY(-4px); box-shadow: 0 20px 36px -20px rgba(110,40,60,.6); }
+.achado__foto { position: relative; aspect-ratio: 1 / 1; background: linear-gradient(160deg, #fff 0%, var(--nude) 100%); }
+.achado__foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: .8rem; }
+.achado__loja { position: absolute; top: .7rem; left: .7rem; background: rgba(255,255,255,.92); color: var(--grafite-2); font-size: .66rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 999px; }
+.achado__corpo { padding: 1rem 1.1rem 1.2rem; display: flex; flex-direction: column; gap: .45rem; flex: 1; }
+.achado__titulo { font: 600 .95rem/1.35 var(--sans); color: var(--grafite); }
+.achado__desc { font-size: .8rem; color: var(--muted); }
+.achado__rodape { margin-top: auto; padding-top: .6rem; display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.achado__preco { font-family: var(--serif); font-size: 1.25rem; color: var(--grafite); }
+.achados__vazio { text-align: center; padding: 3rem 1rem; background: #fff; border-radius: 20px; max-width: 560px; margin: 0 auto; }
+.achados__vazio h2 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; margin-bottom: .6rem; }
+.achados__vazio p { color: var(--muted); margin-bottom: 1.4rem; }
+.achados__aviso { max-width: 680px; margin: 3rem auto 0; text-align: center; font-size: .74rem; color: var(--muted); line-height: 1.6; }
+@media (max-width: 560px) {
+  .achados-topo .btn { display: none; }
+  .achados__grade { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .achado__corpo { padding: .8rem; }
+  .achado__titulo { font-size: .84rem; }
+  .achado__rodape .btn { width: 100%; justify-content: center; }
+}
