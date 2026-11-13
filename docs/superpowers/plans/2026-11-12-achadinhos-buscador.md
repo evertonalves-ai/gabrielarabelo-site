@@ -1579,6 +1579,10 @@ Adicionar ao fim de `styles.css`:
 .painel__link { font-size: .78rem; color: var(--dourado); }
 .painel__msg { font-size: .8rem; color: var(--muted); text-align: center; margin: .4rem 0; min-height: 1em; }
 .painel__msg--erro { color: #b4475f; }
+@media (max-width: 560px) {
+  .painel .achados__grade { grid-template-columns: 1fr; }
+  .painel .achado__foto { aspect-ratio: 16 / 9; }
+}
 ```
 
 - [ ] **Step 4: Testar localmente (login real)**
