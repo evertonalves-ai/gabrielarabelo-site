@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Painel dos Achadinhos</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' https://cdn.jsdelivr.net; connect-src https://kjcmorylizjelnnfjbas.supabase.co wss://kjcmorylizjelnnfjbas.supabase.co; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css?v=11">
+</head>
+<body class="achados-pagina painel">
+
+<header class="achados-topo">
+  <span class="marca"><img src="../../assets/logo.svg" alt="" width="36" height="36"><span class="marca__nome">Painel<small>Achadinhos</small></span></span>
+  <button type="button" class="btn btn--linha btn--sm" id="sair" hidden><span>Sair</span></button>
+</header>
+
+<main class="achados">
+  <section id="telaLogin" class="painel__login" hidden>
+    <h1>Entrar no painel</h1>
+    <p>Digite seu e-mail. Você recebe um link para entrar, sem senha.</p>
+    <form id="formLogin">
+      <input id="email" type="email" autocomplete="email" required placeholder="seu@email.com">
+      <button class="btn btn--escuro" type="submit"><span>Enviar link</span></button>
+    </form>
+    <p class="painel__msg" id="msgLogin" role="status"></p>
+  </section>
+
+  <section id="telaPainel" hidden>
+    <nav class="achados__filtros" aria-label="Situação">
+      <button type="button" class="achados__chip" data-status="rascunho" aria-pressed="true">Para aprovar</button>
+      <button type="button" class="achados__chip" data-status="aprovado" aria-pressed="false">No ar</button>
+      <button type="button" class="achados__chip" data-status="descartado" aria-pressed="false">Descartados</button>
+      <button type="button" class="achados__chip" id="abrirNovo">+ Adicionar por link</button>
+    </nav>
+
+    <form id="formNovo" class="painel__novo" hidden>
+      <h2>Adicionar por link</h2>
+      <label>Link do produto (Amazon, Mercado Livre ou Shopee)<input name="url" type="url" required></label>
+      <label>Nome do produto<input name="titulo" required minlength="2" maxlength="120"></label>
+      <label>Preço (ex.: 59,90)<input name="preco" inputmode="decimal"></label>
+      <label>Link da foto (botão direito na foto → copiar endereço da imagem)<input name="imagem_url" type="url"></label>
+      <label>Categoria<input name="categoria" maxlength="40" list="categorias"></label>
+      <datalist id="categorias"><option value="Skincare"><option value="Corpo"><option value="Cabelo"><option value="Maquiagem"></datalist>
+      <div class="painel__acoes">
+        <button class="btn btn--escuro btn--sm" type="submit"><span>Publicar</span></button>
+        <button class="btn btn--linha btn--sm" type="button" id="cancelarNovo"><span>Cancelar</span></button>
+      </div>
+      <p class="painel__msg" id="msgNovo" role="status"></p>
+    </form>
+
+    <p class="painel__msg" id="msgLista" role="status"></p>
+    <ul class="achados__grade" id="lista"></ul>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js" integrity="sha384-GFr3yTh5lJznCbZfpTtXnwboFsxqtTQoeTZCRHhE0579KrRmlCzen5AA8ohaB5ug" crossorigin="anonymous"></script>
+<script type="module" src="painel.js?v=11"></script>
+</body>
+</html>
