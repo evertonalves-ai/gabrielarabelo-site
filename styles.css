@@ -130,11 +130,12 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
 .marca { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
 .marca__nome { font-family: var(--serif); font-size: 1.35rem; color: var(--grafite); line-height: 1; display: flex; flex-direction: column; }
 .marca__nome small { font-family: var(--sans); font-size: .56rem; letter-spacing: .38em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
-.menu { display: flex; gap: 2rem; margin-left: auto; }
-.menu a { text-decoration: none; font-size: .84rem; color: var(--grafite-2); overflow: hidden; display: block; height: 1.4em; }
+.menu { display: flex; gap: 1.5rem; margin-left: auto; }
+.menu a { text-decoration: none; font-size: .84rem; color: var(--grafite-2); overflow: hidden; display: block; height: 1.4em; white-space: nowrap; flex-shrink: 0; }
 .menu a span { display: block; position: relative; transition: transform .5s var(--ease); }
 .menu a span::after { content: attr(data-txt); position: absolute; left: 0; top: 100%; color: var(--dourado); }
 .menu a:hover span { transform: translateY(-100%); }
+.topo__cta { white-space: nowrap; flex-shrink: 0; }
 .menu-toggle { display: none; background: none; border: 0; width: 40px; height: 40px; cursor: pointer; margin-left: auto; }
 .menu-toggle span { display: block; width: 24px; height: 1.5px; background: var(--grafite); margin: 6px auto; transition: transform .35s var(--ease); }
 .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }
@@ -515,10 +516,8 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
 }
 
 /* ---------- Responsivo ---------- */
-@media (max-width: 1080px) {
-  .cards { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 880px) {
+/* Menu completo (7 itens + logo + botão) precisa de ~1110px; abaixo disso vira menu sanduíche */
+@media (max-width: 1140px) {
   .menu-toggle { display: block; }
   .topo__cta { display: none; }
   .menu {
@@ -529,6 +528,14 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
   }
   .menu.aberto { clip-path: inset(0 0 0 0); }
   .menu a { padding: 1rem 16px; height: auto; border-top: 1px solid var(--nude); font-size: 1rem; }
+  /* A cópia dourada do efeito de hover vazava pelo padding e aparecia cortada embaixo de cada item */
+  .menu a span::after { display: none; }
+  .menu a:hover span { transform: none; color: var(--dourado); }
+}
+@media (max-width: 1080px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 880px) {
   .hero { padding-top: 110px; min-height: auto; }
   .hero__grid, .sobre, .agendar, .contato, .duvidas { grid-template-columns: 1fr; gap: 2.8rem; }
   .hero__visual { order: -1; }
