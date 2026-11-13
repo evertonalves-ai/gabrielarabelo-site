@@ -1243,7 +1243,7 @@ test("texto do grupo sem desconto", () => {
 
 - [ ] **Step 3: Rodar e ver falhar**
 
-Run: `node --test tests/`
+Run: `node --test tests/*.test.js`
 Expected: falha com `Cannot find module ... achadinhos/painel/links.js`.
 
 - [ ] **Step 4: Implementar**
@@ -1313,7 +1313,7 @@ export function textoGrupo(item) {
 
 - [ ] **Step 5: Rodar e ver passar**
 
-Run: `node --test tests/`
+Run: `node --test tests/*.test.js`
 Expected: `# pass 10`, `# fail 0`.
 
 - [ ] **Step 6: Commit**
