@@ -1,0 +1,35 @@
+{
+  "data": {
+    "productOfferV2": {
+      "nodes": [
+        {
+          "itemId": 22334455,
+          "productName": "Sérum Vitamina C 30ml",
+          "priceMin": "59.90",
+          "priceMax": "59.90",
+          "priceDiscountRate": 25,
+          "commissionRate": "0.08",
+          "sales": 1520,
+          "ratingStar": "4.9",
+          "imageUrl": "https://down-br.img.susercontent.com/file/abc",
+          "offerLink": "https://s.shopee.com.br/AbC123",
+          "productLink": "https://shopee.com.br/product/1/22334455",
+          "shopName": "Loja Beleza Oficial"
+        },
+        {
+          "itemId": 99887766,
+          "productName": "Item sem link",
+          "priceMin": "10.00",
+          "priceDiscountRate": 0,
+          "commissionRate": "0.05",
+          "sales": 300,
+          "ratingStar": "4.8",
+          "imageUrl": "https://down-br.img.susercontent.com/file/def",
+          "offerLink": "",
+          "shopName": "Outra"
+        }
+      ],
+      "pageInfo": { "page": 1, "limit": 50, "hasNextPage": false }
+    }
+  }
+}
