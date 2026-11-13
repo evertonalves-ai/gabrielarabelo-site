@@ -1,0 +1,36 @@
+name: Buscar ofertas (achadinhos)
+
+on:
+  schedule:
+    # Todo dia 11:00 UTC = 08:00 em Brasília
+    - cron: "0 11 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install --disable-pip-version-check -q -r requirements-dev.txt
+
+      - name: Testes
+        run: python -m pytest -q
+
+      - name: Buscar e gravar rascunhos
+        env:
+          SUPABASE_URL: https://kjcmorylizjelnnfjbas.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SHOPEE_APP_ID: ${{ secrets.SHOPEE_APP_ID }}
+          SHOPEE_SECRET: ${{ secrets.SHOPEE_SECRET }}
+        working-directory: scripts
+        run: python buscar_ofertas.py

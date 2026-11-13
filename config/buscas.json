@@ -1,0 +1,12 @@
+{
+  "filtros": { "avaliacao_min": 4.7, "vendas_min": 100, "comissao_min_pct": 5, "por_busca": 10 },
+  "dias_rascunho": 14,
+  "buscas": [
+    { "termo": "protetor solar facial", "categoria": "Skincare" },
+    { "termo": "sérum vitamina C", "categoria": "Skincare" },
+    { "termo": "ácido hialurônico", "categoria": "Skincare" },
+    { "termo": "hidratante corporal firmador", "categoria": "Corpo" },
+    { "termo": "óleo corporal", "categoria": "Corpo" },
+    { "termo": "máscara capilar", "categoria": "Cabelo" }
+  ]
+}
