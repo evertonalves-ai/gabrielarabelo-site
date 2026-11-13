@@ -601,6 +601,9 @@ em { font-style: italic; font-weight: 300; background: var(--ouro-grad); -webkit
 .achados__vazio { text-align: center; padding: 3rem 1rem; background: #fff; border-radius: 20px; max-width: 560px; margin: 0 auto; }
 .achados__vazio h2 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; margin-bottom: .6rem; }
 .achados__vazio p { color: var(--muted); margin-bottom: 1.4rem; }
+.achado__precos { display: flex; align-items: baseline; flex-wrap: wrap; gap: .35rem; }
+.achado__de { font-size: .78rem; color: var(--muted); }
+.achado__off { font-size: .7rem; font-weight: 600; color: #fff; background: #b4475f; border-radius: 999px; padding: .1rem .45rem; }
 .achados__aviso { max-width: 680px; margin: 3rem auto 0; text-align: center; font-size: .74rem; color: var(--muted); line-height: 1.6; }
 @media (max-width: 560px) {
   .achados-topo .btn { display: none; }

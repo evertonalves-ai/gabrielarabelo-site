@@ -4,7 +4,7 @@
   // Chave publicável: só permite LER os achadinhos ativos (RLS + grants por coluna).
   const SUPABASE_URL = "https://kjcmorylizjelnnfjbas.supabase.co";
   const SUPABASE_KEY = "sb_publishable_JTFPBNC2iM1LXi0IDYxSfQ_HPAH6BB0";
-  const CAMPOS = "titulo,descricao,preco,imagem_url,link,loja,categoria";
+  const CAMPOS = "titulo,descricao,preco,imagem_url,link,loja,categoria,preco_original,desconto_pct";
 
   // Convite do grupo de ofertas (https://chat.whatsapp.com/...). Vazio = botão escondido.
   const GRUPO_WHATSAPP = "";
@@ -36,6 +36,10 @@
     return e;
   }
 
+  function formatarBRL(valor) {
+    return Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  }
+
   function card(item) {
     const li = el("li", "achado");
     const img = urlSegura(item.imagem_url);
@@ -57,7 +61,15 @@
     corpo.append(el("h2", "achado__titulo", item.titulo));
     if (item.descricao) corpo.append(el("p", "achado__desc", item.descricao));
     const rodape = el("div", "achado__rodape");
-    if (item.preco) rodape.append(el("span", "achado__preco", item.preco));
+    if (item.preco) {
+      const precos = el("div", "achado__precos");
+      if (item.preco_original && item.desconto_pct > 0) {
+        precos.append(el("s", "achado__de", formatarBRL(item.preco_original)));
+        precos.append(el("span", "achado__off", `-${Math.round(item.desconto_pct)}%`));
+      }
+      precos.append(el("span", "achado__preco", item.preco));
+      rodape.append(precos);
+    }
     const a = el("a", "btn btn--escuro btn--sm");
     a.href = item.link;
     a.target = "_blank";
@@ -96,7 +108,7 @@
   async function carregar() {
     try {
       const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/achadinhos?select=${CAMPOS}&ativo=eq.true&order=ordem.asc,created_at.desc&limit=200`,
+        `${SUPABASE_URL}/rest/v1/achadinhos?select=${CAMPOS}&status=eq.aprovado&order=ordem.asc,created_at.desc&limit=200`,
         { headers: { apikey: SUPABASE_KEY } }
       );
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
